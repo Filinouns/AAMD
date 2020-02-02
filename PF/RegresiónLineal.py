@@ -131,21 +131,18 @@ data = data.dropna()
 data = data.reset_index(drop=True)
 transformData(data)
 
+data.info()
+
 alpha = 0.005
 
-X = data.drop(labels = ['Price','Installs','Category_i','Type','Content Rating','Rating','Size','Genres_i','NameSize'],axis = 1).values
-Y = data.drop(labels = ['Price','Installs','Category_i','Type','Content Rating','Reviews','Size','Genres_i','NameSize'],axis = 1).values
+X = data.drop(labels = ['Price','Rating','Category_i','Type','Content Rating','Size','Genres_i','NameSize'],axis = 1)
+Y = data.Rating
 
 
 m = np.shape(X)[0]
 n = np.shape(X)[1]
-print(m,n)
+X = np.hstack([np.ones([m, 1]), X])
 
-my = np.shape(Y)[0]
-ny = np.shape(Y)[1]
-print(my,ny)
-
-print(Y)
 
 def h(x, Theta):
     return np.dot(x, np.transpose(Theta))
@@ -157,8 +154,7 @@ def coste(X, Y, Theta):
 
 def descenso_gradiente(x, y, times):
     theta = np.zeros([1, n+1], dtype = float)
-    print(theta)
-    c = np.zeros([times, n+1], dtype = float)
+    c = np.zeros([times, 1], dtype = float)
     for i in range(times):
         H = h(x, theta)
         aux0 = theta[0][0] - alpha*np.sum((H-y))*(1/m)
