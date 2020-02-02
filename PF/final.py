@@ -141,12 +141,21 @@ d = pd.read_csv('data/googleplaystore.csv')
 d = d.dropna()
 d = transform_data(d)
 d.drop(labels = ['Type', 'Category_i', 'Genres_i', 'Content Rating', 
-                    'Size', 'Rating', 'Price'], axis = 1, inplace = True)
+                    'Size', 'Price'], axis = 1, inplace = True)
 d.info()
 
 # -----------------------------
 # Fin transformación de datos
 # -----------------------------
+
+# Regresión lineal
+
+def RegresionLineal(data):
+    def doIt(data):
+        return
+
+    doIt(data)
+
 
 # ------------------------------
 # Regresion Logistica
@@ -209,19 +218,6 @@ def RegresionLogistica(data):
         draw_data(X, Y)
         draw_decision_boundary(theta, X, Y, poly)
         plt.show()
-
-    def load_csv_svm(file_name, features):
-        dataFile = pd.read_csv(file_name, header = 0)
-
-        dataFile = dataFile.fillna(0)
-        y = dataFile['Rating'].array
-
-        X = np.array([])
-        X = np.reshape(X, (len(y), 0))
-        for i in range(len(features)):
-            X = np.c_[X, dataFile[features[i]].array]
-
-        return X, y
 
     def load_Data(data, y_feat, features):
         #if y_feat == "Rating":
@@ -403,5 +399,11 @@ def RedNeuronal(data):
         #b = c
         print("Precision de la red neuronal: " + str(a) + " %")
     doIt(d)
+
+def SVM(data):
+    def doIt(data):
+        return
+    doIt(data)
+
 
 RegresionLogistica(d)
